@@ -1,48 +1,43 @@
-import { createBrowserRouter } from "react-router-dom";
-import HomePage from "../pages/HomePage.tsx";
-import SignInPage from "../pages/auth/SignInPage.tsx";
-import SignUpPage from "../pages/auth/SignUpPage.tsx";
-import ProtectedPage from "../pages/ProtectedPage.tsx";
-import NotFoundPage from "../pages/404Page.tsx";
-import AuthProtectedRoute from "./AuthProtectedRoute.tsx";
-import Providers from "../Providers.tsx";
+import { createBrowserRouter } from 'react-router-dom'
+import Providers from '../Providers'
+import AuthProtectedRoute from './AuthProtectedRoute'
+
+import HomePage        from '../pages/HomePage'
+import SignInPage      from '../pages/auth/SignInPage'
+import SignUpPage      from '../pages/auth/SignUpPage'
+import NotFoundPage    from '../pages/404Page'
+
+import DashboardPage   from '../pages/dashboard/DashboardPage'
+import WorkoutsPage    from '../pages/workouts/WorkoutsPage'
+import WeightPage      from '../pages/weight/WeightPage'
+import ExercisesPage   from '../pages/exercises/ExercisesPage'
+import ProfilePage     from '../pages/profile/ProfilePage'
 
 const router = createBrowserRouter([
-  // I recommend you reflect the routes here in the pages folder
   {
-    path: "/",
+    path: '/',
     element: <Providers />,
     children: [
-      // Public routes
+      // Public
+      { path: '/',              element: <HomePage /> },
+      { path: '/auth/sign-in',  element: <SignInPage /> },
+      { path: '/auth/sign-up',  element: <SignUpPage /> },
+
+      // Protected — requires auth
       {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/auth/sign-in",
-        element: <SignInPage />,
-      },
-      {
-        path: "/auth/sign-up",
-        element: <SignUpPage />,
-      },
-      // Auth Protected routes
-      {
-        path: "/",
+        path: '/',
         element: <AuthProtectedRoute />,
         children: [
-          {
-            path: "/protected",
-            element: <ProtectedPage />,
-          },
+          { path: '/dashboard',  element: <DashboardPage /> },
+          { path: '/workouts',   element: <WorkoutsPage /> },
+          { path: '/weight',     element: <WeightPage /> },
+          { path: '/exercises',  element: <ExercisesPage /> },
+          { path: '/profile',    element: <ProfilePage /> },
         ],
       },
     ],
   },
-  {
-    path: "*",
-    element: <NotFoundPage />,
-  },
-]);
+  { path: '*', element: <NotFoundPage /> },
+])
 
-export default router;
+export default router
