@@ -14,6 +14,8 @@ import WorkoutDetailPage  from '../pages/workouts/WorkoutDetailPage'
 import WeightPage         from '../pages/weight/WeightPage'
 import ExercisesPage      from '../pages/exercises/ExercisesPage'
 import ProfilePage        from '../pages/profile/ProfilePage'
+import ChatPage           from '../pages/chat/ChatPage'
+import KnowledgeBasePage  from '../pages/admin/KnowledgeBasePage'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
           { path: '/workouts/:id',     element: <WorkoutDetailPage /> },
           { path: '/weight',           element: <WeightPage /> },
           { path: '/exercises',        element: <ExercisesPage /> },
+          { path: '/chat',             element: <ChatPage /> },
+          { path: '/admin/knowledge',  element: <KnowledgeBasePage /> },
           { path: '/profile',          element: <ProfilePage /> },
         ],
       },

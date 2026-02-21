@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useSession } from '../../context/SessionContext'
+import { useProfile } from '../../hooks/useProfile'
 import { supabase } from '../../supabase'
 
 const navItems = [
@@ -7,10 +8,12 @@ const navItems = [
   { to: '/workouts',   label: 'Workouts',  icon: '🏋' },
   { to: '/weight',     label: 'Weight',    icon: '⚖' },
   { to: '/exercises',  label: 'Exercises', icon: '📋' },
+  { to: '/chat',       label: 'AI Coach',  icon: '🤖' },
 ]
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { session } = useSession()
+  const { profile } = useProfile()
   const { pathname } = useLocation()
 
   async function handleSignOut() {
@@ -48,6 +51,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             {session ? (
               <>
+                {profile?.role === 'admin' && (
+                  <Link
+                    to="/admin/knowledge"
+                    className={`text-sm text-slate-400 hover:text-slate-100 px-3 py-1.5 rounded-btn transition-colors hover:bg-surface-700
+                      ${pathname.startsWith('/admin') ? 'bg-accent-600/20 text-accent-400' : ''}`}
+                  >
+                    Admin
+                  </Link>
+                )}
                 <Link
                   to="/profile"
                   className={`text-sm text-slate-400 hover:text-slate-100 px-3 py-1.5 rounded-btn transition-colors hover:bg-surface-700
