@@ -53,11 +53,11 @@ export default function ProfilePage() {
       bio: formData.bio || null,
       avatar_url: formData.avatar_url || null,
       fitness_goal: formData.fitness_goal || null,
-      experience_level: formData.experience_level || null,
+      experience_level: (formData.experience_level || null) as any,
       height_cm: formData.height_cm ? parseFloat(formData.height_cm) : null,
       weight_kg: formData.weight_kg ? parseFloat(formData.weight_kg) : null,
       goal_weight_kg: formData.goal_weight_kg ? parseFloat(formData.goal_weight_kg) : null,
-      activity_level: formData.activity_level || null,
+      activity_level: (formData.activity_level || null) as any,
       units: formData.units as 'metric' | 'imperial',
     }
 

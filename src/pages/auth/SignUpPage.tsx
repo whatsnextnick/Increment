@@ -10,7 +10,7 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
+  const [needsConfirmation, setNeedsConfirmation] = useState(false)
   const [loading, setLoading] = useState(false)
 
   if (session) return <Navigate to="/dashboard" replace />
@@ -19,13 +19,23 @@ export default function SignUpPage() {
     e.preventDefault()
     setError('')
     setLoading(true)
-    const { error } = await supabase.auth.signUp({ email, password })
-    if (error) setError(error.message)
-    else setSuccess(true)
+
+    const { data, error } = await supabase.auth.signUp({ email, password })
+
+    if (error) {
+      setError(error.message)
+    } else {
+      // If user.identities is empty, it means email confirmation is required
+      // If user has a session, they're auto-logged in (confirmation disabled)
+      if (data.user && !data.session) {
+        setNeedsConfirmation(true)
+      }
+      // else: user is auto-logged in, SessionContext will handle redirect
+    }
     setLoading(false)
   }
 
-  if (success) {
+  if (needsConfirmation) {
     return (
       <div className="flex min-h-dvh items-center justify-center bg-surface-900 px-4">
         <div className="w-full max-w-sm text-center">
@@ -33,6 +43,9 @@ export default function SignUpPage() {
           <h2 className="text-xl font-bold text-slate-100">Check your email</h2>
           <p className="mt-2 text-sm text-surface-400">
             We sent a confirmation link to <span className="text-slate-200">{email}</span>
+          </p>
+          <p className="mt-4 text-xs text-surface-500">
+            Click the link in the email to activate your account
           </p>
           <Link to="/auth/sign-in" className="mt-6 inline-block text-sm text-brand-400 hover:text-brand-300">
             Back to sign in
