@@ -7,11 +7,13 @@ import SignInPage      from '../pages/auth/SignInPage'
 import SignUpPage      from '../pages/auth/SignUpPage'
 import NotFoundPage    from '../pages/404Page'
 
-import DashboardPage   from '../pages/dashboard/DashboardPage'
-import WorkoutsPage    from '../pages/workouts/WorkoutsPage'
-import WeightPage      from '../pages/weight/WeightPage'
-import ExercisesPage   from '../pages/exercises/ExercisesPage'
-import ProfilePage     from '../pages/profile/ProfilePage'
+import DashboardPage      from '../pages/dashboard/DashboardPage'
+import WorkoutsPage       from '../pages/workouts/WorkoutsPage'
+import NewWorkoutPage     from '../pages/workouts/NewWorkoutPage'
+import WorkoutDetailPage  from '../pages/workouts/WorkoutDetailPage'
+import WeightPage         from '../pages/weight/WeightPage'
+import ExercisesPage      from '../pages/exercises/ExercisesPage'
+import ProfilePage        from '../pages/profile/ProfilePage'
 
 const router = createBrowserRouter([
   {
@@ -28,11 +30,13 @@ const router = createBrowserRouter([
         path: '/',
         element: <AuthProtectedRoute />,
         children: [
-          { path: '/dashboard',  element: <DashboardPage /> },
-          { path: '/workouts',   element: <WorkoutsPage /> },
-          { path: '/weight',     element: <WeightPage /> },
-          { path: '/exercises',  element: <ExercisesPage /> },
-          { path: '/profile',    element: <ProfilePage /> },
+          { path: '/dashboard',        element: <DashboardPage /> },
+          { path: '/workouts',         element: <WorkoutsPage /> },
+          { path: '/workouts/new',     element: <NewWorkoutPage /> },
+          { path: '/workouts/:id',     element: <WorkoutDetailPage /> },
+          { path: '/weight',           element: <WeightPage /> },
+          { path: '/exercises',        element: <ExercisesPage /> },
+          { path: '/profile',          element: <ProfilePage /> },
         ],
       },
     ],
