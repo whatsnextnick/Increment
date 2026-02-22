@@ -1,6 +1,6 @@
-# ForgeFit Deployment Guide
+# Increm Deployment Guide
 
-This guide provides step-by-step instructions for deploying the ForgeFit fitness tracking application with all its features including RAG chatbot, Edge Functions, and admin dashboard.
+This guide provides step-by-step instructions for deploying the Increm fitness tracking application with all its features including RAG chatbot, Edge Functions, and admin dashboard.
 
 ## Table of Contents
 
@@ -422,7 +422,7 @@ The project includes Netlify MCP server integration. See [NETLIFY_SETUP.md](./NE
 1. Get your Netlify access token
 2. Update `.mcp.json` with your token
 3. Restart Claude Code
-4. Ask Claude to deploy: "Deploy ForgeFit to Netlify"
+4. Ask Claude to deploy: "Deploy Increm to Netlify"
 
 **Using Netlify CLI:**
 

@@ -125,7 +125,7 @@ export default function ChatPage() {
     <AppShell>
       <div className="mx-auto max-w-4xl flex flex-col" style={{ height: 'calc(100vh - 120px)' }}>
         <div className="mb-4">
-          <h1 className="text-2xl font-bold text-slate-100">ForgeFit AI Coach</h1>
+          <h1 className="text-2xl font-bold text-slate-100">Increm <span className="text-gradient">AI Coach</span></h1>
           <p className="mt-1 text-sm text-surface-400">
             Ask me anything about fitness, training, and nutrition
           </p>
@@ -138,7 +138,7 @@ export default function ChatPage() {
               <div className="flex flex-col items-center justify-center h-full text-center py-12">
                 <div className="text-5xl mb-4">🤖</div>
                 <p className="text-lg font-semibold text-slate-200 mb-2">
-                  Welcome to ForgeFit AI!
+                  Welcome to Increm AI!
                 </p>
                 <p className="text-sm text-surface-400 max-w-md mb-6">
                   I'm here to help you with fitness questions. Try asking me about:
@@ -181,7 +181,7 @@ export default function ChatPage() {
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-lg">🤖</span>
                         <span className="text-xs font-medium text-surface-400">
-                          ForgeFit AI
+                          Increm AI
                         </span>
                       </div>
                     )}

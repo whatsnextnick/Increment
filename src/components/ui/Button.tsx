@@ -11,23 +11,23 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const base =
-  'inline-flex items-center justify-center gap-2 font-semibold rounded-btn transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 disabled:opacity-50 disabled:cursor-not-allowed'
+  'inline-flex items-center justify-center gap-2 font-semibold rounded-btn transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none'
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-brand-600 hover:bg-brand-500 active:bg-brand-700 text-white shadow-sm',
+    'btn-gradient text-white shadow-lg',
   secondary:
-    'bg-surface-700 hover:bg-surface-600 active:bg-surface-800 text-slate-100 border border-surface-600',
+    'glass text-slate-100 hover:border-white/[0.14] hover:bg-white/[0.07]',
   ghost:
-    'bg-transparent hover:bg-surface-700 text-slate-300 hover:text-slate-100',
+    'bg-transparent hover:bg-white/[0.05] text-slate-400 hover:text-slate-100',
   danger:
-    'bg-error/10 hover:bg-error/20 text-red-400 border border-red-500/30',
+    'bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/25',
 }
 
 const sizes: Record<Size, string> = {
-  sm: 'h-8  px-3 text-sm',
-  md: 'h-10 px-4 text-sm',
-  lg: 'h-12 px-6 text-base',
+  sm: 'h-8  px-3.5 text-xs tracking-wide',
+  md: 'h-10 px-5   text-sm',
+  lg: 'h-12 px-7   text-base',
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

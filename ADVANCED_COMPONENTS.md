@@ -1,6 +1,6 @@
 # Advanced UI Components Documentation
 
-This document details the 7 advanced UI components implemented in ForgeFit, showcasing modern web development practices including animations, accessibility, and sophisticated state management.
+This document details the 7 advanced UI components implemented in Increm, showcasing modern web development practices including animations, accessibility, and sophisticated state management.
 
 ## Components Overview
 

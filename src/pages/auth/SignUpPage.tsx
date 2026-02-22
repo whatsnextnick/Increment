@@ -25,20 +25,17 @@ export default function SignUpPage() {
     if (error) {
       setError(error.message)
     } else {
-      // If user.identities is empty, it means email confirmation is required
-      // If user has a session, they're auto-logged in (confirmation disabled)
       if (data.user && !data.session) {
         setNeedsConfirmation(true)
       }
-      // else: user is auto-logged in, SessionContext will handle redirect
     }
     setLoading(false)
   }
 
   if (needsConfirmation) {
     return (
-      <div className="flex min-h-dvh items-center justify-center bg-surface-900 px-4">
-        <div className="w-full max-w-sm text-center">
+      <div className="flex min-h-dvh items-center justify-center px-4">
+        <div className="w-full max-w-sm text-center glass rounded-card p-8 animate-scale-in">
           <div className="text-4xl mb-4">✉️</div>
           <h2 className="text-xl font-bold text-slate-100">Check your email</h2>
           <p className="mt-2 text-sm text-surface-400">
@@ -47,7 +44,7 @@ export default function SignUpPage() {
           <p className="mt-4 text-xs text-surface-500">
             Click the link in the email to activate your account
           </p>
-          <Link to="/auth/sign-in" className="mt-6 inline-block text-sm text-brand-400 hover:text-brand-300">
+          <Link to="/auth/sign-in" className="mt-6 inline-block text-sm text-brand-400 hover:text-brand-300 transition-colors">
             Back to sign in
           </Link>
         </div>
@@ -56,17 +53,20 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-surface-900 px-4">
-      <div className="w-full max-w-sm">
+    <div className="flex min-h-dvh items-center justify-center px-4">
+      <div className="w-full max-w-sm animate-slide-in-up">
+        {/* Logo */}
         <div className="mb-8 text-center">
-          <span className="text-3xl">⚡</span>
-          <h1 className="mt-2 text-2xl font-bold text-slate-100">
-            <span className="text-brand-400">Forge</span>Fit
-          </h1>
-          <p className="mt-1 text-sm text-surface-400">Start tracking your fitness journey</p>
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl btn-gradient glow-brand mb-4">
+            <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 17l5-5 4 4 9-9" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold text-gradient-brand">Increm</h1>
+          <p className="mt-1.5 text-sm text-surface-400">Start tracking your fitness journey</p>
         </div>
 
-        <div className="rounded-card border border-surface-700 bg-surface-800 p-6">
+        <div className="glass rounded-card p-6">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <Input
               label="Email"
@@ -89,7 +89,7 @@ export default function SignUpPage() {
             />
 
             {error && (
-              <p className="rounded-btn bg-red-500/10 px-3 py-2 text-sm text-red-400 border border-red-500/20">
+              <p className="rounded-btn bg-rose-500/10 px-3 py-2 text-sm text-rose-400 border border-rose-500/20">
                 {error}
               </p>
             )}
@@ -102,7 +102,7 @@ export default function SignUpPage() {
 
         <p className="mt-4 text-center text-sm text-surface-400">
           Already have an account?{' '}
-          <Link to="/auth/sign-in" className="text-brand-400 hover:text-brand-300 font-medium">
+          <Link to="/auth/sign-in" className="text-brand-400 hover:text-brand-300 font-medium transition-colors">
             Sign in
           </Link>
         </p>

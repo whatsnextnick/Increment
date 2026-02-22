@@ -1,4 +1,4 @@
-# ForgeFit 🏋️
+# Increm 🏋️
 
 A modern fitness tracking application with AI-powered coaching, built with React, Supabase, and OpenAI.
 
@@ -238,4 +238,4 @@ For issues, questions, or feature requests:
 
 ---
 
-**ForgeFit** - Your AI-powered fitness companion 💪
+**Increm** - Your AI-powered fitness companion 💪

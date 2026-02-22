@@ -82,9 +82,9 @@ Deno.serve(async (req: Request) => {
       : null
 
     // Step 4: Call OpenAI Chat Completion with context
-    const systemPrompt = `You are ForgeFit AI, a knowledgeable and encouraging fitness coach. Your role is to provide helpful, evidence-based advice on exercise, training, and fitness.
+    const systemPrompt = `You are Increm AI, a knowledgeable and encouraging fitness coach. Your role is to provide helpful, evidence-based advice on exercise, training, and fitness.
 
-Use the following context from the ForgeFit knowledge base to answer the user's question. If the context doesn't contain relevant information, you can provide general fitness advice, but mention that it's not from the knowledge base.
+Use the following context from the Increm knowledge base to answer the user's question. If the context doesn't contain relevant information, you can provide general fitness advice, but mention that it's not from the knowledge base.
 
 Context:
 ${context}

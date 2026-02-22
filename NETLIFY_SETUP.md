@@ -1,6 +1,6 @@
 # Netlify MCP Server Setup Guide
 
-This guide will help you configure the Netlify MCP server for deploying your ForgeFit application.
+This guide will help you configure the Netlify MCP server for deploying your Increm application.
 
 ## Prerequisites
 
@@ -98,7 +98,7 @@ Once connected, you'll have access to tools for:
 - **Get Build Settings**: View build configuration
 - **Update Build Settings**: Change build commands, publish directory, etc.
 
-## Deploying ForgeFit to Netlify
+## Deploying Increm to Netlify
 
 ### Option 1: Using MCP Tools (Recommended)
 
@@ -109,7 +109,7 @@ Once the MCP server is connected, I can help you:
 3. Set environment variables
 4. Deploy the application
 
-Just ask me: "Deploy ForgeFit to Netlify"
+Just ask me: "Deploy Increm to Netlify"
 
 ### Option 2: Manual Deployment via CLI
 

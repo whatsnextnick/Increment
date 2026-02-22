@@ -1,6 +1,6 @@
 # Supabase Edge Functions
 
-This directory contains Edge Functions for the ForgeFit RAG chatbot system.
+This directory contains Edge Functions for the Increm RAG chatbot system.
 
 ## Functions
 

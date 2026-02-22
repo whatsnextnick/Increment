@@ -1,4 +1,4 @@
-# Netlify configuration for ForgeFit
+# Netlify configuration for Increm
 
 [build]
   command = "npm run build"
