@@ -61,7 +61,7 @@ export default function DashboardPage() {
 
           {/* Primary stat — BorderBeam highlight */}
           <BlurFade delay={0.1} duration={0.4}>
-            <Card className="border-l-4 border-l-brand-500 relative overflow-hidden">
+            <Card className="border-l-4 border-l-brand-500 relative">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs font-medium text-surface-400 uppercase tracking-wide">Workouts This Week</p>

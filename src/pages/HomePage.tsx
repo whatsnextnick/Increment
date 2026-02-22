@@ -66,7 +66,7 @@ export default function HomePage() {
         <div className="mt-12 grid grid-cols-3 gap-4 text-center">
           {features.map(({ icon, label, desc }, i) => (
             <BlurFade key={label} delay={0.36 + i * 0.08} duration={0.45}>
-              <div className="relative rounded-card border border-surface-700 bg-surface-800 p-4 overflow-hidden">
+              <div className="relative rounded-card border border-surface-700 bg-surface-800 p-4">
                 <div className="text-2xl">{icon}</div>
                 <p className="mt-2 text-sm font-semibold text-slate-200">{label}</p>
                 <p className="text-xs text-surface-400">{desc}</p>

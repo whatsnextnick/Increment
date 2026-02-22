@@ -38,7 +38,7 @@ export default function SignUpPage() {
     return (
       <div className="flex min-h-dvh items-center justify-center px-4">
         <BlurFade delay={0} duration={0.4}>
-          <div className="relative w-full max-w-sm text-center glass rounded-card p-8 overflow-hidden">
+          <div className="relative w-full max-w-sm text-center glass rounded-card p-8">
             <div className="text-4xl mb-4">✉️</div>
             <h2 className="text-xl font-bold text-slate-100">Check your email</h2>
             <p className="mt-2 text-sm text-surface-400">
@@ -76,7 +76,7 @@ export default function SignUpPage() {
 
         {/* Form card */}
         <BlurFade delay={0.1} duration={0.45}>
-          <div className="relative glass rounded-card p-6 overflow-hidden">
+          <div className="relative glass rounded-card p-6">
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <Input
                 label="Email"

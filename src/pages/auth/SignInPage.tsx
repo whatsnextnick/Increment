@@ -44,7 +44,7 @@ export default function SignInPage() {
 
         {/* Form card */}
         <BlurFade delay={0.1} duration={0.45}>
-          <div className="relative glass rounded-card p-6 overflow-hidden">
+          <div className="relative glass rounded-card p-6">
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <Input
                 label="Email"
