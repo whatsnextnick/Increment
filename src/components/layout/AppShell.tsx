@@ -53,7 +53,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <>
                 {profile?.role === 'admin' && (
                   <Link
-                    to="/admin/knowledge"
+                    to="/admin"
                     className={`text-sm text-slate-400 hover:text-slate-100 px-3 py-1.5 rounded-btn transition-colors hover:bg-surface-700
                       ${pathname.startsWith('/admin') ? 'bg-accent-600/20 text-accent-400' : ''}`}
                   >

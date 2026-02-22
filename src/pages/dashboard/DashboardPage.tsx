@@ -4,6 +4,8 @@ import { Card } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { Badge } from '../../components/ui/Badge'
 import { EmptyState } from '../../components/ui/EmptyState'
+import { AnimatedNumber } from '../../components/ui/AnimatedNumber'
+import { Skeleton } from '../../components/ui/Skeleton'
 import { useProfile } from '../../hooks/useProfile'
 import { useWorkouts, useWorkoutStats } from '../../hooks/useWorkouts'
 import { useWeightEntries, useLatestWeight } from '../../hooks/useWeightEntries'
@@ -55,9 +57,11 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-surface-400 uppercase tracking-wide">Workouts This Week</p>
-                <p className="mt-1 text-2xl font-bold text-slate-100">
-                  {statsLoading ? '...' : stats.thisWeekWorkouts}
-                </p>
+                {statsLoading ? (
+                  <Skeleton variant="text" width={60} height={32} className="mt-1" />
+                ) : (
+                  <AnimatedNumber value={stats.thisWeekWorkouts} className="mt-1 text-2xl font-bold text-slate-100" />
+                )}
               </div>
               <div className="text-3xl">🏋️</div>
             </div>
@@ -67,9 +71,11 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-surface-400 uppercase tracking-wide">Total Volume (kg)</p>
-                <p className="mt-1 text-2xl font-bold text-slate-100">
-                  {statsLoading ? '...' : stats.totalVolume.toLocaleString()}
-                </p>
+                {statsLoading ? (
+                  <Skeleton variant="text" width={80} height={32} className="mt-1" />
+                ) : (
+                  <AnimatedNumber value={stats.totalVolume} suffix=" kg" className="mt-1 text-2xl font-bold text-slate-100" />
+                )}
               </div>
               <div className="text-3xl">📊</div>
             </div>
@@ -141,7 +147,9 @@ export default function DashboardPage() {
           </div>
 
           {workoutsLoading ? (
-            <p className="py-8 text-center text-sm text-surface-400">Loading...</p>
+            <div className="space-y-3">
+              <Skeleton variant="rectangular" height={100} count={3} />
+            </div>
           ) : workouts.length === 0 ? (
             <EmptyState
               icon={<span className="text-3xl">🏋️</span>}

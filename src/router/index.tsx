@@ -15,6 +15,7 @@ import WeightPage         from '../pages/weight/WeightPage'
 import ExercisesPage      from '../pages/exercises/ExercisesPage'
 import ProfilePage        from '../pages/profile/ProfilePage'
 import ChatPage           from '../pages/chat/ChatPage'
+import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 import KnowledgeBasePage  from '../pages/admin/KnowledgeBasePage'
 
 const router = createBrowserRouter([
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
           { path: '/weight',           element: <WeightPage /> },
           { path: '/exercises',        element: <ExercisesPage /> },
           { path: '/chat',             element: <ChatPage /> },
+          { path: '/admin',            element: <AdminDashboardPage /> },
           { path: '/admin/knowledge',  element: <KnowledgeBasePage /> },
           { path: '/profile',          element: <ProfilePage /> },
         ],

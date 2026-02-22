@@ -1,10 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { SessionProvider } from "./context/SessionContext";
+import { ToastProvider } from "./components/ui/Toast";
 
 const Providers = () => {
   return (
     <SessionProvider>
-      <Outlet />
+      <ToastProvider>
+        <Outlet />
+      </ToastProvider>
     </SessionProvider>
   );
 };

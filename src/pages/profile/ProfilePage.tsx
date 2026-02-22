@@ -4,14 +4,16 @@ import { Card } from '../../components/ui/Card'
 import { Input } from '../../components/ui/Input'
 import { Button } from '../../components/ui/Button'
 import { Badge } from '../../components/ui/Badge'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs'
+import { useToast } from '../../components/ui/Toast'
 import { useProfile } from '../../hooks/useProfile'
 import { useSession } from '../../context/SessionContext'
 
 export default function ProfilePage() {
   const { session } = useSession()
   const { profile, loading, updateProfile } = useProfile()
+  const { showToast } = useToast()
   const [saving, setSaving] = useState(false)
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
   const [formData, setFormData] = useState({
     display_name: '',
@@ -46,7 +48,6 @@ export default function ProfilePage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setSaving(true)
-    setMessage(null)
 
     const updates = {
       display_name: formData.display_name || null,
@@ -64,9 +65,9 @@ export default function ProfilePage() {
     const { error } = await updateProfile(updates)
 
     if (error) {
-      setMessage({ type: 'error', text: error })
+      showToast(error, 'error')
     } else {
-      setMessage({ type: 'success', text: 'Profile updated successfully!' })
+      showToast('Profile updated successfully!', 'success')
     }
 
     setSaving(false)
@@ -98,7 +99,7 @@ export default function ProfilePage() {
         </div>
 
         <Card>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit}>
             <div className="flex items-center gap-4 pb-6 border-b border-surface-700">
               <div className="h-16 w-16 rounded-full bg-surface-700 flex items-center justify-center overflow-hidden">
                 {formData.avatar_url ? (
@@ -113,119 +114,127 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <Input
-                label="Display Name"
-                value={formData.display_name}
-                onChange={e => setFormData(prev => ({ ...prev, display_name: e.target.value }))}
-                placeholder="Your name"
-              />
-              <Input
-                label="Avatar URL"
-                type="url"
-                value={formData.avatar_url}
-                onChange={e => setFormData(prev => ({ ...prev, avatar_url: e.target.value }))}
-                placeholder="https://..."
-              />
-            </div>
+            <Tabs defaultValue="personal" className="mt-6">
+              <TabsList>
+                <TabsTrigger value="personal">Personal Info</TabsTrigger>
+                <TabsTrigger value="fitness">Fitness Info</TabsTrigger>
+                <TabsTrigger value="measurements">Measurements</TabsTrigger>
+              </TabsList>
 
-            <div>
-              <label htmlFor="bio" className="mb-1.5 block text-sm font-medium text-slate-300">Bio</label>
-              <textarea
-                id="bio"
-                rows={3}
-                value={formData.bio}
-                onChange={e => setFormData(prev => ({ ...prev, bio: e.target.value }))}
-                placeholder="Tell us about yourself..."
-                className="w-full rounded-btn bg-surface-800 border border-surface-600 px-3 py-2 text-sm text-slate-100 placeholder:text-surface-400 focus:border-brand-500 outline-none transition-colors resize-none"
-              />
-            </div>
+              <TabsContent value="personal">
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <Input
+                      label="Display Name"
+                      value={formData.display_name}
+                      onChange={e => setFormData(prev => ({ ...prev, display_name: e.target.value }))}
+                      placeholder="Your name"
+                    />
+                    <Input
+                      label="Avatar URL"
+                      type="url"
+                      value={formData.avatar_url}
+                      onChange={e => setFormData(prev => ({ ...prev, avatar_url: e.target.value }))}
+                      placeholder="https://..."
+                    />
+                  </div>
 
-            <div>
-              <label htmlFor="fitness_goal" className="mb-1.5 block text-sm font-medium text-slate-300">Fitness Goal</label>
-              <textarea
-                id="fitness_goal"
-                rows={2}
-                value={formData.fitness_goal}
-                onChange={e => setFormData(prev => ({ ...prev, fitness_goal: e.target.value }))}
-                placeholder="E.g., Build muscle, lose fat, train for marathon..."
-                className="w-full rounded-btn bg-surface-800 border border-surface-600 px-3 py-2 text-sm text-slate-100 placeholder:text-surface-400 focus:border-brand-500 outline-none transition-colors resize-none"
-              />
-            </div>
+                  <div>
+                    <label htmlFor="bio" className="mb-1.5 block text-sm font-medium text-slate-300">Bio</label>
+                    <textarea
+                      id="bio"
+                      rows={3}
+                      value={formData.bio}
+                      onChange={e => setFormData(prev => ({ ...prev, bio: e.target.value }))}
+                      placeholder="Tell us about yourself..."
+                      className="w-full rounded-btn bg-surface-800 border border-surface-600 px-3 py-2 text-sm text-slate-100 placeholder:text-surface-400 focus:border-brand-500 outline-none transition-colors resize-none"
+                    />
+                  </div>
+                </div>
+              </TabsContent>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
-                <label htmlFor="experience_level" className="mb-1.5 block text-sm font-medium text-slate-300">Experience Level</label>
-                <select
-                  id="experience_level"
-                  value={formData.experience_level}
-                  onChange={e => setFormData(prev => ({ ...prev, experience_level: e.target.value }))}
-                  className="h-10 w-full rounded-btn bg-surface-800 border border-surface-600 px-3 text-sm text-slate-100 focus:border-brand-500 outline-none transition-colors"
-                >
-                  <option value="">Select level</option>
-                  <option value="beginner">Beginner</option>
-                  <option value="intermediate">Intermediate</option>
-                  <option value="advanced">Advanced</option>
-                </select>
-              </div>
+              <TabsContent value="fitness">
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="fitness_goal" className="mb-1.5 block text-sm font-medium text-slate-300">Fitness Goal</label>
+                    <textarea
+                      id="fitness_goal"
+                      rows={2}
+                      value={formData.fitness_goal}
+                      onChange={e => setFormData(prev => ({ ...prev, fitness_goal: e.target.value }))}
+                      placeholder="E.g., Build muscle, lose fat, train for marathon..."
+                      className="w-full rounded-btn bg-surface-800 border border-surface-600 px-3 py-2 text-sm text-slate-100 placeholder:text-surface-400 focus:border-brand-500 outline-none transition-colors resize-none"
+                    />
+                  </div>
 
-              <div>
-                <label htmlFor="activity_level" className="mb-1.5 block text-sm font-medium text-slate-300">Activity Level</label>
-                <select
-                  id="activity_level"
-                  value={formData.activity_level}
-                  onChange={e => setFormData(prev => ({ ...prev, activity_level: e.target.value }))}
-                  className="h-10 w-full rounded-btn bg-surface-800 border border-surface-600 px-3 text-sm text-slate-100 focus:border-brand-500 outline-none transition-colors"
-                >
-                  <option value="">Select activity</option>
-                  <option value="sedentary">Sedentary</option>
-                  <option value="light">Lightly Active</option>
-                  <option value="moderate">Moderately Active</option>
-                  <option value="active">Very Active</option>
-                </select>
-              </div>
-            </div>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="experience_level" className="mb-1.5 block text-sm font-medium text-slate-300">Experience Level</label>
+                      <select
+                        id="experience_level"
+                        value={formData.experience_level}
+                        onChange={e => setFormData(prev => ({ ...prev, experience_level: e.target.value }))}
+                        className="h-10 w-full rounded-btn bg-surface-800 border border-surface-600 px-3 text-sm text-slate-100 focus:border-brand-500 outline-none transition-colors"
+                      >
+                        <option value="">Select level</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                      </select>
+                    </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <Input
-                label="Height (cm)"
-                type="number"
-                step="0.1"
-                value={formData.height_cm}
-                onChange={e => setFormData(prev => ({ ...prev, height_cm: e.target.value }))}
-                placeholder="175"
-              />
-              <Input
-                label="Current Weight (kg)"
-                type="number"
-                step="0.1"
-                value={formData.weight_kg}
-                onChange={e => setFormData(prev => ({ ...prev, weight_kg: e.target.value }))}
-                placeholder="75"
-              />
-              <Input
-                label="Goal Weight (kg)"
-                type="number"
-                step="0.1"
-                value={formData.goal_weight_kg}
-                onChange={e => setFormData(prev => ({ ...prev, goal_weight_kg: e.target.value }))}
-                placeholder="80"
-              />
-            </div>
+                    <div>
+                      <label htmlFor="activity_level" className="mb-1.5 block text-sm font-medium text-slate-300">Activity Level</label>
+                      <select
+                        id="activity_level"
+                        value={formData.activity_level}
+                        onChange={e => setFormData(prev => ({ ...prev, activity_level: e.target.value }))}
+                        className="h-10 w-full rounded-btn bg-surface-800 border border-surface-600 px-3 text-sm text-slate-100 focus:border-brand-500 outline-none transition-colors"
+                      >
+                        <option value="">Select activity</option>
+                        <option value="sedentary">Sedentary</option>
+                        <option value="light">Lightly Active</option>
+                        <option value="moderate">Moderately Active</option>
+                        <option value="active">Very Active</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
 
-            {message && (
-              <div
-                className={`rounded-btn px-4 py-3 text-sm ${
-                  message.type === 'success'
-                    ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-                    : 'bg-red-500/10 text-red-400 border border-red-500/20'
-                }`}
-              >
-                {message.text}
-              </div>
-            )}
+              <TabsContent value="measurements">
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <Input
+                      label="Height (cm)"
+                      type="number"
+                      step="0.1"
+                      value={formData.height_cm}
+                      onChange={e => setFormData(prev => ({ ...prev, height_cm: e.target.value }))}
+                      placeholder="175"
+                    />
+                    <Input
+                      label="Current Weight (kg)"
+                      type="number"
+                      step="0.1"
+                      value={formData.weight_kg}
+                      onChange={e => setFormData(prev => ({ ...prev, weight_kg: e.target.value }))}
+                      placeholder="75"
+                    />
+                    <Input
+                      label="Goal Weight (kg)"
+                      type="number"
+                      step="0.1"
+                      value={formData.goal_weight_kg}
+                      onChange={e => setFormData(prev => ({ ...prev, goal_weight_kg: e.target.value }))}
+                      placeholder="80"
+                    />
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
 
-            <div className="flex justify-end pt-4 border-t border-surface-700">
+            <div className="flex justify-end pt-6 mt-6 border-t border-surface-700">
               <Button type="submit" loading={saving}>
                 Save changes
               </Button>
