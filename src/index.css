@@ -183,3 +183,104 @@ a { text-decoration: none; }
 .animate-slide-in-right { animation: slide-in-right 0.3s ease-out; }
 .animate-slide-in-left  { animation: slide-in-left 0.3s ease-out; }
 .animate-slide-in-up    { animation: slide-in-up 0.3s ease-out; }
+
+/* ─────────────────────────────────────────────
+   Magic UI Components
+───────────────────────────────────────────── */
+
+/* ── AnimatedGradientText ── */
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.animated-gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--grad-from, #c4b5fd) 0%,
+    var(--grad-to,   #22d3ee) 50%,
+    var(--grad-from, #c4b5fd) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow var(--grad-speed, 3s) ease-in-out infinite;
+}
+
+/* ── BorderBeam ── */
+@property --border-beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes border-beam-rotate {
+  to { --border-beam-angle: 360deg; }
+}
+
+.border-beam {
+  border: calc(var(--border-width, 1.5) * 1px) solid transparent;
+  background:
+    conic-gradient(
+      from var(--border-beam-angle, 0deg),
+      transparent 0deg,
+      transparent calc(360deg - calc(var(--size, 90) * 1deg)),
+      var(--color-from, #8b5cf6) calc(360deg - calc(var(--size, 90) * 1deg)),
+      var(--color-to,   #22d3ee) 360deg
+    ) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0) border-box;
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0) border-box;
+  mask-composite: exclude;
+  animation: border-beam-rotate calc(var(--duration, 8) * 1s) linear calc(var(--delay, 0) * -1s) infinite;
+}
+
+/* ── ShimmerButton ── */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(300%)  skewX(-12deg); }
+}
+
+.shimmer-button {
+  position: relative;
+  overflow: hidden;
+  background: var(--shimmer-bg, linear-gradient(135deg, #7c3aed 0%, #6366f1 100%));
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: box-shadow 0.2s, transform 0.15s;
+  letter-spacing: 0.01em;
+}
+.shimmer-button:hover {
+  box-shadow: 0 0 28px rgba(124, 58, 237, 0.5);
+  transform: translateY(-1px);
+}
+.shimmer-button:active  { transform: translateY(0); }
+.shimmer-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.shimmer-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    var(--shimmer-color, rgba(255,255,255,0.22)) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%) skewX(-12deg);
+  animation: shimmer-sweep var(--shimmer-duration, 2.5s) ease-in-out infinite;
+}
